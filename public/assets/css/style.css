@@ -1,0 +1,51 @@
+/* Hide DataTables search filter */
+#DataTables_Table_0_filter {
+  display: none;
+}
+
+/* Font Definitions */
+@font-face {
+  font-family: 'Bebas Neue Thin';
+  src: url('../fonts/BebasNeue-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bebas Neue Light';
+  src: url('../fonts/BebasNeue-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bebas Neue Book';
+  src: url('../fonts/BebasNeue-Book.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bebas Neue Regular';
+  src: url('../fonts/BebasNeue-Regular.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bebas Neue Bold';
+  src: url('../fonts/BebasNeue-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* General Styles */
+body {
+  font-family: 'Bebas Neue Regular', sans-serif;
+  background-image: url('../img/bg.webp');
+  background-repeat: repeat;
+  color: black;
+}
+
+
+

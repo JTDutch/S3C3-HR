@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  web:
+    build: . # Assuming you have a Dockerfile in the root directory
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    networks:
+      - unhinged_network
+
+  db:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DATABASE_ROOTPASSWORD}  # Password for root user
+      MYSQL_DATABASE: ${DATABASE_NAME}          # Name of the database
+      MYSQL_USER: ${DATABASE_USER}              # Non-root database user
+      MYSQL_PASSWORD: ${DATABASE_PASSWORD}      # Password for the non-root database user
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./unhinged.sql:/docker-entrypoint-initdb.d/unhinged.sql:ro
+    networks:
+      - unhinged_network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    # environment:
+    #   PMA_HOST: db                      # The host of the database service (should be the service name in docker-compose)
+    #   PMA_USER: root                    # The MySQL root user
+    #   PMA_PASSWORD: ${DATABASE_ROOTPASSWORD}  # The root password as specified in the environment variables
+    #   PMA_ABSOLUTE_URI: http://localhost:8081  # Make sure this is the correct URI for accessing PHPMyAdmin
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
+    networks:
+      - unhinged_network
+
+volumes:
+  db-data:
+
+networks:
+  unhinged_network:
+    driver: bridge

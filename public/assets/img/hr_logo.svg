@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="HR Application logo">
+  <!-- Transparent background -->
+  <defs>
+    <linearGradient id="bgGrad" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#2196F3"/>
+      <stop offset="1" stop-color="#1E88E5"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded blue square -->
+  <rect x="156" y="80" width="712" height="712" rx="120" ry="120" fill="url(#bgGrad)"/>
+
+  <!-- Magnifying glass outer circle -->
+  <g transform="translate(0,0)" fill="#ffffff" stroke="none">
+    <circle cx="512" cy="380" r="180" />
+    <rect x="642" y="516" width="180" height="46" rx="23" ry="23" transform="rotate(38 732 539)" />
+  </g>
+
+  <!-- Person silhouette -->
+  <g>
+    <circle cx="512" cy="360" r="52" fill="#ffffff"/>
+    <path d="M432 454c0-38 64-68 160-68s160 30 160 68c0 44-72 88-160 88s-160-44-160-88z" fill="#ffffff"/>
+  </g>
+
+  <!-- Text in white -->
+  <g fill="#ffffff" font-family="Helvetica, Arial, sans-serif" text-anchor="middle">
+    <text x="512" y="870" font-size="160" font-weight="700">HR</text>
+    <text x="512" y="940" font-size="56" font-weight="600" letter-spacing="6">APPLICATION</text>
+  </g>
+</svg>
