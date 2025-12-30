@@ -14,6 +14,12 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
 
+<div id="flash-data"
+     data-success="<?= session()->getFlashdata('success') ?>"
+     data-error="<?= session()->getFlashdata('error') ?>"
+     style="display:none;"></div>
+
+
   <?php if(session()->get('account_id')):?>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">

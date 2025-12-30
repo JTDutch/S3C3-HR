@@ -67,7 +67,7 @@ class Filters extends BaseFilters
         'before' => [
             // Apply the adminauth filter globally except for the following routes
             'adminauth' => ['except' => [
-                'home/login'
+                'Login'
                 ]
             ],
         ],

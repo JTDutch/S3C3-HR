@@ -110,3 +110,16 @@ if (!function_exists("prepare_datatable_query")) {
 }
 
 
+/**
+ * Returns the value of an environment variable or a default if it's not set.
+ */
+function getEnvOrDefault(string $var, mixed $default): mixed
+{
+    $value = getenv($var);
+
+    if ($value !== false && $value !== '') {
+        return $value;
+    }
+
+    return $default;
+}

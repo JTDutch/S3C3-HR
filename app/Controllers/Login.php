@@ -48,7 +48,7 @@ class Login extends BaseController
                     $this->session->set('account_id', $user->id);
 
                     // Redirect to the home page
-                    return redirect()->to(base_url('Agenda/index'));
+                    return redirect()->to(base_url('Home'));
                 } else {
                     // If authentication fails, set the error message for invalid login
                     $errors = 'Invalid email or password.';
@@ -64,5 +64,12 @@ class Login extends BaseController
         $this->viewData['title'] = 'HR-Application | Login';
         $this->viewData['view'] = 'Login/index';
         echo view('template', $this->viewData);
+    }
+
+        public function callback()
+    {
+        $code = $this->request->getGet('code');
+        debug("Callback");
+        debug($code,1);
     }
 }

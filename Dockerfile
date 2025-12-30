@@ -1,30 +1,39 @@
 # Use the official PHP image with Apache for version 8.1.32
 FROM php:8.1.32-apache
 
-# Install necessary PHP extensions and netcat (netcat-openbsd)
-RUN apt-get update && apt-get install -y libicu-dev netcat-openbsd \
+# Install required system packages + PHP extensions
+RUN apt-get update && apt-get install -y \
+    libicu-dev \
+    jq \
     && docker-php-ext-configure intl \
-    && docker-php-ext-install intl pdo pdo_mysql mysqli
+    && docker-php-ext-install intl pdo pdo_mysql mysqli \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-
-# Copy the application code to the container
+# Copy application code
 COPY . /var/www/html
 
-# Set the Apache document root to the public directory
-RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
+# Force-remove .env (belt + suspenders)
+RUN rm -f /var/www/html/.env
 
-# Add Directory configuration to allow .htaccess overrides
+# Set Apache document root to /public
+RUN sed -i 's|/var/www/html|/var/www/html/public|g' \
+    /etc/apache2/sites-available/000-default.conf
+
+# Allow .htaccess
 RUN echo '<Directory /var/www/html/public>\n\
     Options Indexes FollowSymLinks\n\
     AllowOverride All\n\
     Require all granted\n\
 </Directory>' >> /etc/apache2/sites-available/000-default.conf
 
-# Enable mod_rewrite for Apache
+# Enable Apache rewrite
 RUN a2enmod rewrite
 
-# Set permissions for the web server
+# Correct permissions
 RUN chown -R www-data:www-data /var/www/html
 
-# Expose port 80
+# Expose HTTP
 EXPOSE 80
+
+# Start Apache directly (NO entrypoint script)
+CMD ["apache2-foreground"]

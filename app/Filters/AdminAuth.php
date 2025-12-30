@@ -13,7 +13,7 @@ class AdminAuth implements FilterInterface
         // Check if the user is logged in
         if (!session()->get('account_id')) {
             // If not logged in, redirect to login page
-            return redirect()->to(base_url('Login'))->with('error', 'You must be logged in to access the HR panel.');
+            return redirect()->to('//Login'); // relatieve path, gebruikt dezelfde host en poort
         }
 
         // If logged in, allow the request to proceed

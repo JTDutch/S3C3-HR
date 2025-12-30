@@ -108,4 +108,47 @@ class AccountModel extends Model
 
         return (int) $count;
     }
+
+    public function get_departments()
+    {
+        return $this->db->query("SELECT * FROM `departments` WHERE `deleted_at` IS NULL")->getResult();
+    }
+
+    public function onboard_employee($first_name, $middle_name, $last_name, $email, $department_id, $start_date)
+    {
+        $this->db->query("
+            INSERT INTO `employees`
+            (
+                `first_name`,
+                `middle_name`,
+                `last_name`,
+                `email`,
+                `department_id`,
+                `start_date`
+            )
+            VALUES
+            (
+                ?,
+                ?,
+                ?,
+                ?,
+                ?,
+                ?
+            )
+        ", array(
+            $first_name,
+            $middle_name,
+            $last_name,
+            $email,
+            $department_id,
+            $start_date
+        ));
+
+        return $this->db->insertID();
+    }
+
+    public function offboard_employee($id)
+    {
+        return $this->db->query("UPDATE `employees` SET `onboarded` = 0 WHERE `id` = ? AND `deleted_at` IS NULL", array($id));
+    }
 }
