@@ -67,7 +67,8 @@ class Filters extends BaseFilters
         'before' => [
             // Apply the adminauth filter globally except for the following routes
             'adminauth' => ['except' => [
-                'Login'
+                'Login',
+                'Login/*'
                 ]
             ],
         ],
@@ -103,12 +104,6 @@ class Filters extends BaseFilters
     public array $filters = [
         'before' => [
             // Apply 'adminauth' filter to specific routes of the 'Contact' controller
-            'contact/json',
-            'contact/details',
-            'contact/add_link',
-            'contact/remove_link',
-            'contact/change_ticket_status',
-            'contact/delete_mail',
         ],
     ];
 }

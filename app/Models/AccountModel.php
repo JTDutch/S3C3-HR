@@ -114,11 +114,12 @@ class AccountModel extends Model
         return $this->db->query("SELECT * FROM `departments` WHERE `deleted_at` IS NULL")->getResult();
     }
 
-    public function onboard_employee($first_name, $middle_name, $last_name, $email, $department_id, $start_date)
+    public function onboard_employee($cognito_sub, $first_name, $middle_name, $last_name, $email, $department_id, $start_date)
     {
         $this->db->query("
             INSERT INTO `employees`
             (
+                `cognito_sub`,
                 `first_name`,
                 `middle_name`,
                 `last_name`,
@@ -133,9 +134,11 @@ class AccountModel extends Model
                 ?,
                 ?,
                 ?,
+                ?,
                 ?
             )
         ", array(
+            $cognito_sub,
             $first_name,
             $middle_name,
             $last_name,

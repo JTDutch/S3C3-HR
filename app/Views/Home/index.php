@@ -165,7 +165,7 @@
                 <h5 class="modal-title">New Employee Onboarding</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <form action="/onboarding/create" method="POST">
+            <form action="/Onboarding/Create" method="POST">
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="name" class="form-label">First Name*</label>

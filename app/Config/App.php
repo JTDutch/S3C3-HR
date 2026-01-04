@@ -97,13 +97,9 @@ class App extends BaseConfig
      *
      * @var array<string, string>|list<string>
      */
-    public array $proxyIPs = [
-        '0.0.0.0/0' => [
-            'HTTP_X_FORWARDED_FOR',
-            'HTTP_X_FORWARDED_PROTO',
-            'HTTP_X_FORWARDED_PORT',
-        ],
-    ];
+        public array $proxyIPs = [
+            '0.0.0.0/0' => 'HTTP_X_FORWARDED_FOR', // Let op: value is **string**, niet array
+        ];
 
 
     /**

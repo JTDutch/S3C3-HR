@@ -10,18 +10,22 @@ class AdminAuth implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        // Check if the user is logged in
-        if (!session()->get('account_id')) {
-            // If not logged in, redirect to login page
-            return redirect()->to('//Login'); // relatieve path, gebruikt dezelfde host en poort
+        // Niet ingelogd
+        if (!session()->get('logged_in')) {
+            return redirect()->to('//Login');
         }
 
-        // If logged in, allow the request to proceed
+        // Geen tokens = ongeldige sessie
+        if (!session()->get('id_token') || !session()->get('access_token')) {
+            session()->destroy();
+            return redirect()->to('//Login');
+        }
+
         return null;
     }
 
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        // No post-processing required
+        // niets
     }
 }

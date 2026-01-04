@@ -7,21 +7,8 @@
                     <div class="text-center mb-4">
                         <h1 class="card-title mb-2">HR Portal</h1>
                         <p class="text-muted">Sign in to your account</p>
+                        <a href="https://ci4-cs3.auth.eu-west-1.amazoncognito.com/login?client_id=ee88uo4f6ql4s4csg8u336b27&response_type=code&scope=email+openid+profile&redirect_uri=https%3A%2F%2Fd11mpfkw137uxn.cloudfront.net%2Flogin%2Fcallback" class="btn btn-primary">Login</a>
                     </div>
-
-                    <form action="" method="POST">
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email address</label>
-                            <input type="email" class="form-control form-control-lg" id="email" name="email" placeholder="name@company.com" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control form-control-lg" id="password" name="password" placeholder="Enter your password" required>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary btn-lg w-100 mb-3">Sign In</button>
-                    </form>
                 </div>
             </div>
         </div>

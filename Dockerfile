@@ -1,18 +1,18 @@
-# Use the official PHP image with Apache for version 8.1.32
 FROM php:8.1.32-apache
 
-# Install required system packages + PHP extensions
+# Install system packages + PHP extensions
 RUN apt-get update && apt-get install -y \
     libicu-dev \
+    libcurl4-openssl-dev \
     jq \
     && docker-php-ext-configure intl \
-    && docker-php-ext-install intl pdo pdo_mysql mysqli \
+    && docker-php-ext-install intl pdo pdo_mysql mysqli curl \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Copy application code
 COPY . /var/www/html
 
-# Force-remove .env (belt + suspenders)
+# Force-remove .env
 RUN rm -f /var/www/html/.env
 
 # Set Apache document root to /public
@@ -32,8 +32,6 @@ RUN a2enmod rewrite
 # Correct permissions
 RUN chown -R www-data:www-data /var/www/html
 
-# Expose HTTP
 EXPOSE 80
 
-# Start Apache directly (NO entrypoint script)
 CMD ["apache2-foreground"]

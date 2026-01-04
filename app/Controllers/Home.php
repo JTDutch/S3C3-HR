@@ -13,21 +13,28 @@ class Home extends BaseController
 
     public function index()
     {
+        if (session()->get('group_id') == 3) {
+            // Offboarding
+            $this->viewData['offboarded_employees'] = $this->AccountModel->get_offboarded_employees();
+            $this->viewData['offboarded_employees_count'] = $this->AccountModel->get_offboarded_employees_count();
 
-        // Offboarding
-        $this->viewData['offboarded_employees'] = $this->AccountModel->get_offboarded_employees();
-        $this->viewData['offboarded_employees_count'] = $this->AccountModel->get_offboarded_employees_count();
+            // Onboarding
+            $this->viewData['onboarded_employees'] = $this->AccountModel->get_onboarded_employees();
+            $this->viewData['onboarded_employees_count'] = $this->AccountModel->get_onboarded_employees_count();
 
-        // Onboarding
-        $this->viewData['onboarded_employees'] = $this->AccountModel->get_onboarded_employees();
-        $this->viewData['onboarded_employees_count'] = $this->AccountModel->get_onboarded_employees_count();
+            // Departments
+            $this->viewData['departments'] = $this->AccountModel->get_departments();
+            
+            $this->viewData['title'] = 'HR-Application | Home';
+            $this->viewData['view'] = 'Home/index';
+            echo view('template', $this->viewData);
+        }
+        else {
+            $this->viewData['title'] = 'HR-Application | Home';
+            $this->viewData['view'] = 'Users/index';
+            echo view('template', $this->viewData);
+        }
 
-        // Departments
-        $this->viewData['departments'] = $this->AccountModel->get_departments();
-        
-        $this->viewData['title'] = 'HR-Application | Home';
-        $this->viewData['view'] = 'Home/index';
-        echo view('template', $this->viewData);
     }
 
 }
