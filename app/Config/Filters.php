@@ -68,7 +68,9 @@ class Filters extends BaseFilters
             // Apply the adminauth filter globally except for the following routes
             'adminauth' => ['except' => [
                 'Login',
-                'Login/*'
+                'Login/*',
+                'index.php/Login',
+                'index.php/Login/*'
                 ]
             ],
         ],

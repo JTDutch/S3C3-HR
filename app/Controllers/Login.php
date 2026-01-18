@@ -15,7 +15,16 @@ class Login extends BaseController
     }
 
     public function index()
-    {
+    {   
+
+        $params = http_build_query([
+            'client_id'     => $this->cognito->clientId,
+            'response_type' => 'code',
+            'scope'         => 'openid email profile',
+            'redirect_uri'  => $this->cognito->callback_url,
+        ]);
+
+        $this->viewData['cognito_login'] = rtrim($this->cognito->domain, '/') . '/login?' . $params;
         $this->viewData['title'] = 'HR-Application | Login';
         $this->viewData['view'] = 'Login/index';
         echo view('template', $this->viewData);
@@ -127,6 +136,7 @@ public function callback()
         }
 
         session()->set([
+            'email'    => $username,
             'group'    => $userGroupName, // HR / IT / Marketing
             'group_id' => $userGroupId,   // 1 / 2 / 3
         ]);
@@ -136,6 +146,14 @@ public function callback()
         return redirect()->to('/Home');
 
     } catch (\Throwable $e) {
+        debug([
+            'class'   => get_class($e),
+            'message' => $e->getMessage(),
+            'code'    => $e->getCode(),
+            'file'    => $e->getFile(),
+            'line'    => $e->getLine(),
+        ], true);
+        
         log_message('error', 'Failed to get user groups: ' . $e->getMessage());
 
         return redirect()->to('/login')->with('error', 'Login failed.');

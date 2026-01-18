@@ -20,7 +20,7 @@
      style="display:none;"></div>
 
 
-  <?php if(session()->get('account_id')):?>
+  <?php if(session()->get('logged_in')):?>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">HR Portal</a>

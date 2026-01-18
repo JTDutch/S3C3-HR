@@ -75,4 +75,30 @@ class CognitoService
 
         return $sub;
     }
+
+	public function deleteUser(string $sub): bool
+	{
+	    // Zoek eerst de username van de user via listUsers
+	    $result = $this->client->listUsers([
+	        'UserPoolId' => $this->config->userPoolId,
+	        'Filter'     => "sub = \"$sub\"",
+	        'Limit'      => 1,
+	    ]);
+
+	    if (empty($result['Users'])) {
+	        throw new \RuntimeException("User with sub $sub not found in Cognito");
+	    }
+
+	    $username = $result['Users'][0]['Username'];
+
+	    // Delete user
+	    $this->client->adminDeleteUser([
+	        'UserPoolId' => $this->config->userPoolId,
+	        'Username'   => $username,
+	    ]);
+
+	    return true;
+	}
+
+
 }

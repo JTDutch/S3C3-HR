@@ -14,10 +14,28 @@ class Offboarding extends BaseController
     public function delete($id)
     {
         if(isset($id)){
-            $success = $this->AccountModel->offboard_employee($id);
+
+            $cognito = new \App\Libraries\CognitoService();
+            $cognito_sub = $this->AccountModel->get_cognito_sub($id);
+            $success_cognito = $cognito->deleteUser($cognito_sub);
+
+            if($success_cognito){
+                $success = $this->AccountModel->offboard_employee($id);
+            }
+            else{
+                session()->setFlashdata('error', 'Employee offboarding failed');
+                return redirect()->to('/Home');
+
+            }
+
             if ($success){
                 session()->setFlashdata('success', 'Employee offboarded successfully');
                 return redirect()->to('/Home');
+            }
+            else{
+                session()->setFlashdata('error', 'Employee offboarding failed');
+                return redirect()->to('/Home');
+                
             }
         }
         else{

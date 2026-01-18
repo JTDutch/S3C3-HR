@@ -28,7 +28,7 @@ class App extends BaseConfig
      * Index File
      * --------------------------------------------------------------------------
      */
-    public string $indexPage = 'index.php';
+    public string $indexPage = '';
 
     /**
      * --------------------------------------------------------------------------
@@ -108,6 +108,10 @@ class App extends BaseConfig
      * --------------------------------------------------------------------------
      */
     public bool $CSPEnabled = false;
+
+
+public bool $cookieSecure = true;
+public string $cookieSameSite = 'None';
 
     /**
      * --------------------------------------------------------------------------

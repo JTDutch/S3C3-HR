@@ -12,6 +12,8 @@ class Cognito extends BaseConfig
     public string $region;
     public string $secret;
     public string $callback_url;
+    public string $logout_url;
+    public string $login_url;
 
 
     public function __construct()
@@ -22,5 +24,8 @@ class Cognito extends BaseConfig
         $this->region           = getenv('AWS_REGION');
         $this->secret           = getenv('COGNITO_CLIENT_SECRET');
         $this->callback_url     = getenv('COGNITO_CALLBACK_URL');
+        $this->logout_url       = getenv('COGNITO_LOGOUT_URL');
+        $this->login_url       = getenv('COGNITO_LOGIN_URL');
+
     }
 }

@@ -12,13 +12,13 @@ class AdminAuth implements FilterInterface
     {
         // Niet ingelogd
         if (!session()->get('logged_in')) {
-            return redirect()->to('//Login');
+            return redirect()->to('/Login');
         }
 
         // Geen tokens = ongeldige sessie
         if (!session()->get('id_token') || !session()->get('access_token')) {
             session()->destroy();
-            return redirect()->to('//Login');
+            return redirect()->to('/Login');
         }
 
         return null;

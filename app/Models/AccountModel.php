@@ -154,4 +154,10 @@ class AccountModel extends Model
     {
         return $this->db->query("UPDATE `employees` SET `onboarded` = 0 WHERE `id` = ? AND `deleted_at` IS NULL", array($id));
     }
+
+    public function get_cognito_sub($id)
+    {
+        $row = $this->db->query("SELECT `cognito_sub` FROM `employees` WHERE `id` = ? AND `deleted_at` IS NULL ", array($id))->getRow();
+        return $row->cognito_sub ?? null;
+    }
 }
